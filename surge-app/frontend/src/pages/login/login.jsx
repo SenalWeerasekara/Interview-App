@@ -9,7 +9,7 @@ function LoginPage(){
                         <div className="text-3xl text-white">Login / Register</div>    
                         <div className="pl-20 pr-20 pt-20 pb-10 w-full">
                             <div className="text-lg "><input type="text" placeholder="Email"  className="text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
-                            <div className="text-lg mt-10"><input type="Password"  placeholder="Password"  className="text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
+                            <div className="text-lg mt-14"><input type="Password"  placeholder="Password"  className="text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
                         </div>
                         <div className="flex justify-end items-center mt-16 bg-blue-00">
                             <div  className="flex text-white items-center mr-5">Register</div>
@@ -19,8 +19,8 @@ function LoginPage(){
                 </div>
 
                 <div className="bg-white w-2/5 grid h-screen place-items-center">
-                    <div className="m-20">
-                        <div className="text-5xl mb-10">Surge SE Internship {'\n'} March 2023</div>
+                    <div className="m-28">
+                        <div className="text-5xl mb-10"><span className="font-bold text-red-600">Surge</span> SE Internship {'\n'} March 2023</div>
                         <div className="text-4xl" >Senal Weerasekara</div>
                     </div>
                 </div>
