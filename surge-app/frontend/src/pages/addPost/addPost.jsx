@@ -82,7 +82,7 @@ const AddPost = ({setOpenAddPost}) =>{
 
     return (
         <div>
-            <div className="fixed inset-0 bg-gradient-to-br from-black/60 to-black/60 flex justify-center items-center backdrop-blur-sm">
+            <div className="fixed z-50 inset-0 bg-gradient-to-br from-black/60 to-black/60 flex justify-center items-center backdrop-blur-sm">
                 <div className="  pt-4 pb-4 p-4  rounded-2xl bg-gradient-to-br from-red-700/40 to-gray-600/40">
                   
                     <div className="bg-white p-10 pr-20 pl-20 rounded-2xl">

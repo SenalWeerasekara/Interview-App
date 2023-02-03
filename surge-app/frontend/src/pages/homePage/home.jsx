@@ -42,8 +42,8 @@ function HomePage(){
                         </div>
                     </div>
 
-                    <div className="bg-green-200 w-1/4 pt-48 sticky top-0">
-                        <div className="sticky top-0">
+                    <div className="bg-green-200 w-1/4 pt-48">
+                        <div className="sticky top-0 z-10">
                             <div className="bg-blue-100 h-48">1</div>
                             <div className="bg-blue-200 h-10">2</div>
                             <div className="bg-blue-300 h-10">3</div>
