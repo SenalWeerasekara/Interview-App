@@ -5,6 +5,8 @@ import LoginPage from "../pages/login/login";
 import RegisterPage from "../pages/login/register";
 import ShowPost from "../pages/showPost/showPosts";
 import HomePage from "../pages/homePage/home";
+import PostBody from "../components/postBody";
+import SideBar from "../components/sidebar";
 
 export default function Routers() {
     return (
@@ -14,6 +16,8 @@ export default function Routers() {
             <Route path="/register" element={<RegisterPage />}> </Route>
             <Route path="/showPost" element={<ShowPost />}> </Route>
             <Route path="/home" element={<HomePage />}> </Route>
+            <Route path="/test" element={<PostBody />}> </Route>
+            <Route path="/side" element={<SideBar />}> </Route>
         </Routes>
            
         </BrowserRouter>
