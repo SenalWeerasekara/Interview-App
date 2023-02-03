@@ -1,25 +1,16 @@
 const express = require('express')
 const router = express.Router();
+const {createPost, getPosts, getSinglePost, deletePost, updatePost} = require('../controllers/postControl')
 
 //Get all workout
-router.get('/', (req, res) =>{
-    res.json({messg: 'test'})
-})
+router.get('/', getPosts)
 
-router.get('/:id', (req, res) =>{
-    res.json({messg: 'testw'})
-})
+router.get('/:id', getSinglePost)
 
-router.post('/', (req, res)=>{
-    res.json({messg: 'testw2'})
-})
+router.post('/', createPost)
 
-router.delete('/:id', (req, res)=>{
-    res.json({messg: 'tdelete'})
-})
+router.delete('/:id', deletePost)
 
-router.patch('/:id', (req, res)=>{
-    res.json({messg: 'update'})
-})
+router.patch('/:id', updatePost)
 
 module.exports = router

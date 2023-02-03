@@ -3,8 +3,13 @@ const express = require('express')
 const postsRoutes = require('./routes/posts')
 const mongoose = require('mongoose')
 
+
+
 // express app
 const app = express()
+
+var cors = require('cors')
+app.use(cors())
 
 //middleware
 app.use(express.json())
