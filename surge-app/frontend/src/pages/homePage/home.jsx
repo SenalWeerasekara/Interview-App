@@ -5,6 +5,7 @@ import SideBar from "../../components/sidebar";
 import ShowPost from "../showPost/showPosts";
 import ShowMyPost from "../showPost/showMyPosts";
 import { useLogout } from "../../hook/useLogout";
+import ShowUser from "./showUser";
 
 function HomePage(){
 
@@ -37,7 +38,7 @@ function HomePage(){
                                 onClick={() =>setOpenAddPost(true)}
                                 className="bg-red-600 mt-4 rounded-2xl text-white content-center p-3 pl-14 pr-14 bg-fixed  hover:bg-red-700 active:bg-red-800">
                                 Post
-                                </button>
+                            </button>
                                 {openAddPost && (
                                     <AddPost
                                         setOpenAddPost={setOpenAddPost}
@@ -54,10 +55,9 @@ function HomePage(){
 
                     <div className="bg-green-200 w-1/4 pt-48">
                         <div className="sticky top-0 z-10">
-                            <div className="bg-blue-100 h-48">1</div>
-                            <div className="bg-blue-200 h-10">2</div>
-                            <div className="bg-blue-300 h-10">3</div>
-                            <div className="bg-blue-400 h-10">4</div>
+                            <div className="bg-blue-100 h-48">
+                              <ShowUser />
+                            </div>
                             <div className="bg-blue-500 h-10">
                                 <button onClick={handleLogout} className="py-2 px-7 rounded bg-red-600">Log Out</button>
                             </div>
