@@ -100,11 +100,8 @@ const AddPost = ({setOpenAddPost}) =>{
                                 <svg fill="none" stroke="currentColor" className="p-20" stroke-width="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
-
-                         
-                            <div className='p-10 h-10 w-10 bg-red-400' onClick={(event) => pick_image()}>add photo</div>
-
                             </div>
+                            <div className='p-4 bg-red-300' onClick={(event) => pick_image()}>add photo</div>
                         
                             <div>Description</div> 
                             <div><textarea 

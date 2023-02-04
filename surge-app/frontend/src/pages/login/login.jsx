@@ -25,7 +25,7 @@ function LoginPage(){
                         
                             <div className="text-3xl text-white">Login</div>    
                             <div className="ml-20 mr-20 pt-20 pb-10 w-full">
-                                <div className="text-lg w-full"><input onChange={(e)=> setEmail(e.target.value)} value={email} type="text" placeholder="Email"  className="text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
+                                <div className="text-lg w-full"><input onChange={(e)=> setEmail(e.target.value)} value={email} type="text" placeholder="Email/Username"  className="text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
                                 <div className="text-lg mt-14"><input onChange={(e)=> setPassword(e.target.value)} value={password} type="Password"  placeholder="Password"  className="text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
                             </div>
                             {error && <div>{error}</div>}

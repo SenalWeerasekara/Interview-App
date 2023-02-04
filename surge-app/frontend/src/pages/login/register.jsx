@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function RegisterPage(){
     let navigate = useNavigate();
-    const [userName, setUserName] = useState('')
+    const [username, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordCon, setPasswordCon] = useState('')
@@ -15,7 +15,7 @@ function RegisterPage(){
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
-        await signup(email, password)
+        await signup(email, password, username)
     }
     
     return (
@@ -28,7 +28,7 @@ function RegisterPage(){
                         
                                 <div className="ml-20 mr-20 pt-20 pb-10 w-full">
                                     <div className="text-lg mt-14 w-full"><input onChange={(e)=> setEmail(e.target.value)} value={email} type="text" placeholder="Email"  className="text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
-                                    <div className="text-lg mt-14 w-full"><input onChange={(e)=> setUserName(e.target.value)} value={userName} type="text" placeholder="User Name"  className="text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
+                                    <div className="text-lg mt-14 w-full"><input onChange={(e)=> setUserName(e.target.value)} value={username} type="text" placeholder="User Name"  className="text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
                                     <div className="text-lg mt-14"><input onChange={(e)=> setPassword(e.target.value)} value={password} type="Password"  placeholder="Password"  className="text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
                                     <div className="text-lg mt-14"><input onChange={(e)=> setPasswordCon(e.target.value)} value={passwordCon} type="Confirm Password"  placeholder="Password"  className="text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
                                 </div>

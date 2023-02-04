@@ -20,16 +20,16 @@ const userSchema = new Schema({
     },
     username : {
         type : String,
-        required : false
+        required : true
     }
 })
 
 // static signup method
-userSchema.statics.signup = async function (email, password) {
+userSchema.statics.signup = async function (email, password, username) {
 
     //validation
-    if (!email || !password){
-        throw Error('All fields are empty')
+    if (!email || !password || !username){
+        throw Error('All fields must be filled')
     }
     if(!validator.isEmail(email)){
         throw Error('Email is not valid')
@@ -38,28 +38,36 @@ userSchema.statics.signup = async function (email, password) {
         throw Error('Password is not strong')
     }
 
-    const exists = await this.findOne({ email })
-    if (exists){
+    const existsEmail = await this.findOne({ email })
+    if (existsEmail){
         throw Error('email already in use') 
+    }
+
+    const existsUsername = await this.findOne({ username })
+    if (existsUsername){
+        throw Error('username is already taken') 
     }
 
     //hashing password
     const salt = await bcrypt.genSalt(5)
     const hash = await bcrypt.hash(password, salt)
 
-    const user = await this.create({email, password: hash})
+    const user = await this.create({email, password: hash, username})
     return user
 }
 
 //static login method
 userSchema.statics.login = async function(email, password) {
     if (!email || !password){
-        throw Error('All fields are empty')
+        throw Error('All fields must be filled')
     }
 
-    const user = await this.findOne({email})
+    let user = await this.findOne({email})
     if (!user){
-        throw Error('Email does not exist')
+        user = await this.findOne({username: email})
+    }
+    if (!user){
+        throw Error('Email or Username does not exist')
     }
 
     const match = await bcrypt.compare(password, user.password)
