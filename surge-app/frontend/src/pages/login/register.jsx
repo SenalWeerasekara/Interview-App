@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useSignup } from "../../hook/useSignup";
 import { useNavigate } from "react-router-dom";
 
 
@@ -10,10 +11,11 @@ function RegisterPage(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordCon, setPasswordCon] = useState('')
+    const {signup, error, isLoading} = useSignup()
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
-        console.log(email, password);
+        await signup(email, password)
     }
     
     return (
@@ -30,9 +32,10 @@ function RegisterPage(){
                                     <div className="text-lg mt-14"><input onChange={(e)=> setPassword(e.target.value)} value={password} type="Password"  placeholder="Password"  className="text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
                                     <div className="text-lg mt-14"><input onChange={(e)=> setPasswordCon(e.target.value)} value={passwordCon} type="Confirm Password"  placeholder="Password"  className="text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
                                 </div>
+                                {error && <div> {error} </div>}
                                 <div className="flex justify-end items-center mt-16 bg-blue-00">
                                     <div onClick={()=>(navigate("/login"))}   className="flex text-white items-center mr-5">Login</div>
-                                    <div><button  className="py-2 px-7 rounded bg-red-600">Register</button></div>
+                                    <div><button disabled={isLoading} className="py-2 px-7 rounded bg-red-600">Register</button></div>
                                 </div> 
                             
                         </div>

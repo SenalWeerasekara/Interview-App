@@ -8,15 +8,20 @@ import HomePage from "../pages/homePage/home";
 import PostBody from "../components/postBody";
 import SideBar from "../components/sidebar";
 import ProfilePage from "../pages/profile/profile";
+import { Navigate } from 'react-router-dom';
+import { useAuthContext } from "../hook/useAuthContext";
 
 export default function Routers() {
+    const { user } = useAuthContext()
+
     return (
         <BrowserRouter>
         <Routes>
-            <Route path="/login" element={<LoginPage />}> </Route>
-            <Route path="/register" element={<RegisterPage />}> </Route>
+            <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />}> </Route>
+            <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/" />}> </Route>
+            <Route path="/home" element={ user ? <HomePage /> : <Navigate to="/login" /> }> </Route>
+            
             <Route path="/showPost" element={<ShowPost />}> </Route>
-            <Route path="/home" element={<HomePage />}> </Route>
             <Route path="/test" element={<PostBody />}> </Route>
             <Route path="/side" element={<SideBar />}> </Route>
             <Route path="/profile" element={<ProfilePage />}> </Route>

@@ -3,10 +3,18 @@ import { useState } from "react"
 import AddPost from "../addPost/addPost";
 import SideBar from "../../components/sidebar";
 import ShowPost from "../showPost/showPosts";
+import { useLogout } from "../../hook/useLogout";
+
 
 function HomePage(){
+
     const [openAddPost, setOpenAddPost] = useState(false);
     const [topic, setTopic] = useState("Feed");
+    const { logout } = useLogout()
+
+    const handleLogout = () => {
+        logout()
+    }
 
     return (
         <div className="justify-center flex">
@@ -48,7 +56,9 @@ function HomePage(){
                             <div className="bg-blue-200 h-10">2</div>
                             <div className="bg-blue-300 h-10">3</div>
                             <div className="bg-blue-400 h-10">4</div>
-                            <div className="bg-blue-500 h-10">5</div>
+                            <div className="bg-blue-500 h-10">
+                                <button onClick={handleLogout} className="py-2 px-7 rounded bg-red-600">Log Out</button>
+                            </div>
                         </div>
                     </div>
                 </div>

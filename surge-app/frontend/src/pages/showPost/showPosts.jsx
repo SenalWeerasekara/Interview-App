@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import PostBody from "../../components/postBody";
+import { useAuthContext } from "../../hook/useAuthContext";
 
 const ShowPost = () =>{
     const [posts, setPosts] = useState(null)
+    const {user} = useAuthContext()
 
     useEffect(()=>{
         const fetchPosts = async () => {
-            const response = await fetch('/api/post')
+            const response = await fetch('/api/post',{
+                headers: {
+                    'Authorization' : `Bearer ${user.token}`
+                }
+            })
             const json = await response.json()
 
             if (response.ok){
@@ -14,8 +20,11 @@ const ShowPost = () =>{
             }
         }
 
-        fetchPosts()
-    }, [])
+        if (user) {
+            fetchPosts()
+        }
+        
+    }, [user])
 
     return (
         <div>

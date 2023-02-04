@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 // import loading from "/images/loading/loading.gif"
 import { uploadFile } from "../../firebase";
 // import { Storage } from "../../firebase";
+import { useAuthContext } from '../../hook/useAuthContext';
 
 
 
@@ -15,17 +16,24 @@ const ok = "test"
 const handleCancelClick = true
 
 const AddPost = ({setOpenAddPost}) =>{
+    const { user } = useAuthContext()
     const [description, setDes] = useState('')
     const [imageFile, setImage] = useState('')
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
+
+        if(!user){
+            return
+        }
+
         const addpost = {description, username, likes, imageFile}
         const response = await fetch('/api/post/', {
             method: 'POST',
             body: JSON.stringify(addpost),
             headers:{
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${user.token}`
             }
         })
         const json = await response.json()
