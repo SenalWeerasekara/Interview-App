@@ -17,8 +17,8 @@ export default function Routers() {
     return (
         <BrowserRouter>
         <Routes>
-            <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />}> </Route>
-            <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/" />}> </Route>
+            <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/home" />}> </Route>
+            <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/home" />}> </Route>
             <Route path="/home" element={ user ? <HomePage /> : <Navigate to="/login" /> }> </Route>
             
             <Route path="/showPost" element={<ShowPost />}> </Route>

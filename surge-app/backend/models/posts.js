@@ -18,6 +18,10 @@ const postsSchema = new Schema({
         type: String,
         required : false
     },
+    userID: {
+        type: String,
+        required : true
+    }
 }, {timestamps : true})
 
 module.exports = mongoose.model('Post', postsSchema)

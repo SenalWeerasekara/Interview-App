@@ -3,14 +3,15 @@ import { useState } from "react"
 import AddPost from "../addPost/addPost";
 import SideBar from "../../components/sidebar";
 import ShowPost from "../showPost/showPosts";
+import ShowMyPost from "../showPost/showMyPosts";
 import { useLogout } from "../../hook/useLogout";
-
 
 function HomePage(){
 
     const [openAddPost, setOpenAddPost] = useState(false);
     const [topic, setTopic] = useState("Feed");
     const { logout } = useLogout()
+    const [selectedHome, setSelectedHome] = useState("feed")
 
     const handleLogout = () => {
         logout()
@@ -22,14 +23,14 @@ function HomePage(){
                 <div className="flex ">
 
                     <div className="bg-red-200 w-1/4 sticky top-0 "> 
-                        <SideBar /> 
+                        <SideBar setSelectedHome={setSelectedHome}/> 
                     </div>
 
 
                     <div className="bg-blue-200 w-2/4 ">
                         <div className="bg-pink-400 h-20 flex justify-between sticky top-0 ">
                             <div>
-                                <h1>{topic}</h1>
+                                <h1>{selectedHome}</h1>
                             </div>
                             <div>
                             <button
@@ -46,7 +47,8 @@ function HomePage(){
                         </div>
                         
                         <div className="bg-amber-400 z-30 flex justify-center">
-                            <ShowPost />
+                            {selectedHome == 'feed' ? <ShowPost /> : "" }
+                            {selectedHome == 'my' ? <ShowMyPost /> : "" }
                         </div>
                     </div>
 
