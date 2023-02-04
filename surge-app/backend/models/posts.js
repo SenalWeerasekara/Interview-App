@@ -21,6 +21,9 @@ const postsSchema = new Schema({
     userID: {
         type: String,
         required : true
+    },likeState: {
+        type: String,
+        required : false
     }
 }, {timestamps : true})
 

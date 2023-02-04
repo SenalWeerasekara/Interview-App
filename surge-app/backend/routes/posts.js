@@ -5,7 +5,7 @@ const requireAuth = require('../middleware/requireAuth')
 
 router.use(requireAuth)
 
-//Get all workout
+//Get all posts
 router.get('/', getPosts)
 
 router.get('/my', getMyPosts)
