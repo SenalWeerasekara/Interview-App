@@ -15,9 +15,24 @@ function RegisterPage(){
     const {signup, error, isLoading} = useSignup()
     const [uploading, setUploading] = useState(false)
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault()
+    const [valid, setValid] = useState('')
+
+    const handleSubmit = async () =>{
+       
         await signup(email, password, username, name, imageFile )
+    }
+
+    const checkValid = (e) => {
+      e.preventDefault()
+      if (!name || !username || !email || !password || !passwordCon){
+        setValid("All feilds must be filled")
+      } else if(password != passwordCon){
+        setValid("password does not match")
+      } else {
+        setValid(null)
+        console.log("worked")
+        handleSubmit()
+      }
     }
 
     const pick_image = async () => {
@@ -68,21 +83,23 @@ function RegisterPage(){
         <div>
             <div className="flex flex-row h-screen w-screen">
                 <div className="bg-blue-200 w-3/5 grid h-screen place-items-center bg-cover" style={ { backgroundImage: `url("images/login/login.jpg")` }}>
-                    <form action="" onSubmit={handleSubmit}>
-                        <div className="bg-gradient-to-tr from-red-800/40 to-gray-800/70  backdrop-blur-sm pt-16 pb-20 pl-24 pr-24 flex flex-col justify-center items-center rounded-xl">
+                    <form action="" onSubmit={checkValid}>
+                        <div className="bg-gradient-to-tr from-red-800/40 to-gray-800/70  backdrop-blur-sm pt-14 pb-16 pl-24 pr-24 flex flex-col justify-center items-center rounded-xl">
                             <div className="text-3xl text-white">Register</div>    
                         
-                                <div className="ml-20 mr-20 pt-20 pb-10 w-full">
-                                <div className="text-lg mt-14 w-full"><input onChange={(e)=> setName(e.target.value)} value={name} type="text" placeholder="Name"  className="text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
-                                    <div className="text-lg mt-14 w-full"><input onChange={(e)=> setEmail(e.target.value)} value={email} type="text" placeholder="Email"  className="text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
-                                    <div className="text-lg mt-14 w-full"><input onChange={(e)=> setUserName(e.target.value)} value={username} type="text" placeholder="User Name"  className="text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
-                                    <div className="text-lg mt-14"><input onChange={(e)=> setPassword(e.target.value)} value={password} type="Password"  placeholder="Password"  className="text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
-                                    <div className="text-lg mt-14"><input onChange={(e)=> setPasswordCon(e.target.value)} value={passwordCon} type="Confirm Password"  placeholder="Password"  className="text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
-                                    <div className='p-4 bg-red-300' onClick={(event) => pick_image()}>add photo</div>
+                                <div className="ml-20 mr-20 pt-4 pb-2 w-full">
+                                <div className="text-lg mt-14 w-full"><input onChange={(e)=> setName(e.target.value)} value={name} type="text" placeholder="Name"  className="text=4xl bg-black/0 border-0 focus:outline-none text-white border-b-2 w-full placeholder-white " /></div>
+                                    <div className="text-lg mt-14 w-full"><input onChange={(e)=> setEmail(e.target.value)} value={email} type="text" placeholder="Email"  className="text=4xl bg-black/0 focus:outline-none border-0 text-white border-b-2 w-full placeholder-white " /></div>
+                                    <div className="text-lg mt-14 w-full"><input onChange={(e)=> setUserName(e.target.value)} value={username} type="text" placeholder="User Name"  className="text=4xl focus:outline-none bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
+                                    <div className="text-lg mt-14"><input onChange={(e)=> setPassword(e.target.value)} value={password} type="Password"  placeholder="Password"  className="text=4xl focus:outline-none text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
+                                    <div className="text-lg mt-14"><input onChange={(e)=> setPasswordCon(e.target.value)} value={passwordCon} type="Password"  placeholder="Confirm Password"  className="focus:outline-none text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
+                                    <div className='p-2 bg-stone-300 cursor-pointer hover:bg-stone-400 active:bg-stone-500 rounded mt-8' onClick={(event) => pick_image()}>add photo</div>
                                     
                                 </div>
-                                {error && <div> {error} </div>}
-                                <div className="flex justify-end items-center mt-16 bg-blue-00">
+                                {error && <div className="rounded bg-red-300 pl-10 pr-10 pt-2 pb-2 border-2 border-red-800">{error}</div>}
+                                {valid && <div className="rounded bg-red-300 pl-10 pr-10 pt-2 pb-2 border-2 border-red-800">{valid}</div>}
+
+                                <div className="flex justify-end items-center mt-12 bg-blue-00">
                                 
                                     {uploading ? " " :  <div onClick={()=>(navigate("/login"))}   className="flex text-white items-center mr-5">Login</div>}
                                    

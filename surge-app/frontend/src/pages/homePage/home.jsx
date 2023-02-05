@@ -4,20 +4,16 @@ import AddPost from "../addPost/addPost";
 import SideBar from "../../components/sidebar";
 import ShowPost from "../showPost/showPosts";
 import ShowMyPost from "../showPost/showMyPosts";
-import { useLogout } from "../../hook/useLogout";
 import ShowUser from "./showUser";
 
 function HomePage(){
 
     const [openAddPost, setOpenAddPost] = useState(false);
     const [topic, setTopic] = useState("Feed");
-    const { logout } = useLogout()
     const [selectedHome, setSelectedHome] = useState("feed")
     const [username, setUsername] = useState(null);
 
-    const handleLogout = () => {
-        logout()
-    }
+ 
 
     return (
         <div className="justify-center flex">
@@ -44,6 +40,7 @@ function HomePage(){
                                     <AddPost
                                         setOpenAddPost={setOpenAddPost}
                                         username={username}
+                                        
                                     />
                                 )}
                             </div>

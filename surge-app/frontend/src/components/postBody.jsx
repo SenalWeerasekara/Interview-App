@@ -16,7 +16,7 @@ const PostBody = ({post}) =>{
         const likedPostID = post._id
         
         const addLike = {likedPostID}
-        const response = await fetch('/api/likedPost/like/', {
+        const response = await fetch('api/likedPost/like/', {
             method: 'POST',
             body: JSON.stringify(addLike),
             headers:{
@@ -38,7 +38,7 @@ const PostBody = ({post}) =>{
         setLikeCount(data)
         
         const addLike = {data}
-        const response = await fetch('/api/post/like/' + post._id, {
+        const response = await fetch('api/post/like/' + post._id, {
             method: 'PUT',
             body: JSON.stringify(addLike),
             headers:{
@@ -54,6 +54,8 @@ const PostBody = ({post}) =>{
             // updateLikeCount()
         }
     }
+
+    // console.log("username>>>" + post.likes)
     
     return (
         <div className="m-10">

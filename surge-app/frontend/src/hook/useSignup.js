@@ -11,7 +11,7 @@ export const useSignup = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('/api/user/signup', {
+        const response = await fetch('api/user/signup', {
             method : 'POST',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({email,password,username, name, imageFile})

@@ -14,7 +14,7 @@ const ShowUser = ({setUsername}) => {
 
     useEffect(()=>{
         const fetchUser = async () => {
-            const response = await fetch('/api/user/oneuser',{
+            const response = await fetch('api/user/oneuser',{
                 headers: {
                     'Authorization' : `Bearer ${user.token}`
                 }
@@ -23,6 +23,7 @@ const ShowUser = ({setUsername}) => {
 
             if (response.ok){
                 setUserD(json)
+               
                 setUsername(userD.username)
             }
         }
@@ -33,13 +34,19 @@ const ShowUser = ({setUsername}) => {
         
     }, [])
 
+    // setUsername(userD)
+    if (userD) {
+        setUsername(userD.username)
+    }
+    
+
     return (
         <div className="sticky top-28 w-96 mt-48 pt-48 pb-96 mt-28 border-l-2"> 
             <div className="justify-center grid ">
   
                     <div className="h-24 w-24 mb-4"> 
                         {userD == null ? <img  src="./images/profile/nopp.jpg" alt="noppimg" /> : 
-                        <img className="object-contain shadow-lg rounded-full max-w-full h-auto align-middle border-none" src={userD.imageFile ? "userD.imageFile" : "./images/profile/nopp.jpg"} alt="noppimg"/>
+                        <img className="object-contain shadow-lg rounded-full max-w-full h-auto align-middle border-none" src={userD.imageFile ? userD.imageFile : "./images/profile/nopp.jpg"} alt="noppimg"/>
                         }
                     </div> 
         

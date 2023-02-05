@@ -25,7 +25,7 @@ const AddPost = ({setOpenAddPost, username}) =>{
         }
 
         const addpost = {description, username, likes, imageFile}
-        const response = await fetch('/api/post/', {
+        const response = await fetch('api/post/', {
             method: 'POST',
             body: JSON.stringify(addpost),
             headers:{

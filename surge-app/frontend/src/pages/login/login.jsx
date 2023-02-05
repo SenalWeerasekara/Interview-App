@@ -25,10 +25,10 @@ function LoginPage(){
                         
                             <div className="text-3xl text-white">Login</div>    
                             <div className="ml-20 mr-20 pt-20 pb-10 w-full">
-                                <div className="text-lg w-full"><input onChange={(e)=> setEmail(e.target.value)} value={email} type="text" placeholder="Email/Username"  className="text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
-                                <div className="text-lg mt-14"><input onChange={(e)=> setPassword(e.target.value)} value={password} type="Password"  placeholder="Password"  className="text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
+                                <div className="text-lg w-full"><input onChange={(e)=> setEmail(e.target.value)} value={email} type="text" placeholder="Email/Username"  className="focus:outline-none text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
+                                <div className="text-lg mt-14"><input onChange={(e)=> setPassword(e.target.value)} value={password} type="Password"  placeholder="Password"  className="focus:outline-none text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
                             </div>
-                            {error && <div>{error}</div>}
+                            {error && <div className="rounded bg-red-300 pl-10 pr-10 pt-2 pb-2 border-2 border-red-800">{error}</div>}
                             <div className="flex justify-end items-center mt-16 bg-blue-00">
                                 <div onClick={()=>(navigate("/register"))}  className="flex text-white items-center mr-5">Register</div>
                                 <div><button disabled={isLoading} className="py-2 px-7 rounded bg-red-600">Login</button></div>
