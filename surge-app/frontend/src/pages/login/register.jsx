@@ -82,7 +82,7 @@ function RegisterPage(){
     return (
         <div>
             <div className="flex flex-row h-screen w-screen">
-                <div className="bg-blue-200 w-3/5 grid h-screen place-items-center bg-cover" style={ { backgroundImage: `url("images/login/login.jpg")` }}>
+                <div className="bg-red-900 w-3/5 grid h-screen place-items-center bg-cover" style={ { backgroundImage: `url("images/login/login.jpg")` }}>
                     <form action="" onSubmit={checkValid}>
                         <div className="bg-gradient-to-tr from-red-800/40 to-gray-800/70  backdrop-blur-sm pt-14 pb-16 pl-24 pr-24 flex flex-col justify-center items-center rounded-xl">
                             <div className="text-3xl text-white">Register</div>    

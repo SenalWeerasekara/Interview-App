@@ -31,7 +31,7 @@ const PostBody = ({post}) =>{
         const likedPostID = post._id
         
         const addLike = {likedPostID}
-        const response = await fetch('api/likedPost/like/', {
+        const response = await fetch('http://localhost:4000/api/likedPost/like/', {
             method: 'POST',
             body: JSON.stringify(addLike),
             headers:{
@@ -53,7 +53,7 @@ const PostBody = ({post}) =>{
         setLikeCount(data)
         
         const addLike = {data}
-        const response = await fetch('api/post/like/' + post._id, {
+        const response = await fetch('http://localhost:4000/api/post/like/' + post._id, {
             method: 'PUT',
             body: JSON.stringify(addLike),
             headers:{
@@ -88,9 +88,9 @@ const PostBody = ({post}) =>{
                         </div>
                     </div>
                     <div className=" w-1/3 flex justify-center items-center font-medium  text-3xl">{post.username}</div>
-                    <div className=" w-1/3 flex justify-center items-center font-medium text-2xl">{date}</div>
+                    <div className=" w-1/3 flex justify-end mr-4 items-center font-medium text-2xl">{date}</div>
                 </div>
-                <div className=" mt-4 h-10 pl-4 text-2xl">
+                <div className="text-justify mt-4 mb-4 mr-4 pl-4 text-xl">
                     {post.description}
                 </div>
             </div>

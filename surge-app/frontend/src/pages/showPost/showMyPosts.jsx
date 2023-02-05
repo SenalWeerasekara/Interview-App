@@ -8,7 +8,7 @@ const ShowMyPost = () =>{
 
     useEffect(()=>{
         const fetchPosts = async () => {
-            const response = await fetch('api/post/my',{
+            const response = await fetch('http://localhost:4000/api/post/my',{
                 headers: {
                     'Authorization' : `Bearer ${user.token}`
                 }
