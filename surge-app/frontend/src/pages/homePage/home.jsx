@@ -13,6 +13,7 @@ function HomePage(){
     const [topic, setTopic] = useState("Feed");
     const { logout } = useLogout()
     const [selectedHome, setSelectedHome] = useState("feed")
+    const [username, setUsername] = useState(null);
 
     const handleLogout = () => {
         logout()
@@ -42,6 +43,7 @@ function HomePage(){
                                 {openAddPost && (
                                     <AddPost
                                         setOpenAddPost={setOpenAddPost}
+                                        username={username}
                                     />
                                 )}
                             </div>
@@ -56,7 +58,7 @@ function HomePage(){
                     <div className="bg-green-200 w-1/4 pt-48">
                         <div className="sticky top-0 z-10">
                             <div className="bg-blue-100 h-48">
-                              <ShowUser />
+                              <ShowUser setUsername={setUsername}/>
                             </div>
                             <div className="bg-blue-500 h-10">
                                 <button onClick={handleLogout} className="py-2 px-7 rounded bg-red-600">Log Out</button>

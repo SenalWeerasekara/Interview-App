@@ -76,6 +76,21 @@ const updatePost = async (req, res) =>{
     return res.status(200).json(post)
 }
 
+//update like
+const updateLike = async(req, res) => {
+    console.log("backend like works")
+    const postID = req.params.id;
+    const likes = req.body.data;
+    console.log("postID " + postID + "   " + "like " + likes)
+
+    const post = await Post.findOneAndUpdate({_id: postID}, {likes})
+    if(!post){
+        return res.status(404).json({error:'no post'})
+    }
+    return res.status(200).json(post)
+}
+
+
 
 module.exports = {
     createPost,
@@ -84,4 +99,5 @@ module.exports = {
     deletePost,
     updatePost,
     getMyPosts,
+    updateLike
 }

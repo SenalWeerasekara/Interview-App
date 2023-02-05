@@ -7,19 +7,13 @@ import { uploadFile } from "../../firebase";
 import { useAuthContext } from '../../hook/useAuthContext';
 
 
-
-const loading = "tesdt"
-
-const username = "test"
-const likes = 23
-const ok = "test"
+const likes = 0
 const handleCancelClick = true
 
-const AddPost = ({setOpenAddPost}) =>{
+const AddPost = ({setOpenAddPost, username}) =>{
     const { user } = useAuthContext()
     const [description, setDes] = useState('')
     const [imageFile, setImage] = useState('')
-
     const handleSubmit = async (e) =>{
         e.preventDefault()
 
@@ -87,6 +81,7 @@ const AddPost = ({setOpenAddPost}) =>{
         }
       };
 
+      
 
     return (
         <div>

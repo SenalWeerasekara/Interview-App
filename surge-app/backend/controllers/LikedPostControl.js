@@ -7,13 +7,13 @@ const createLike = async(req, res) => {
     
     try{
         const likeUserID = req.user._id
-        console.log("check " + likePostID + " o " + likeUserID)
         const likepost = await LikedPost.create({likeUserID, likePostID})
         res.status(200).json(likepost)
     } catch (error){
         res.status(400).json({error: error.message})
     }
 }
+
 
 module.exports = {
     createLike

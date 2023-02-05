@@ -2,8 +2,7 @@
 import { useAuthContext } from "../../hook/useAuthContext";
 import { useEffect, useState } from "react";
 
-
-const ShowUser = () => {
+const ShowUser = ({setUsername}) => {
     const [userD, setUserD] = useState(null)
     const {user} = useAuthContext()
 
@@ -18,7 +17,7 @@ const ShowUser = () => {
 
             if (response.ok){
                 setUserD(json)
-                console.log(userD.username)
+                setUsername(userD.username)
             }
         }
 
@@ -34,7 +33,7 @@ const ShowUser = () => {
   
                     <div className="h-12 w-12"> 
                         {userD == null ? <img  src="./images/profile/nopp.jpg" alt="noppimg" /> : 
-                        <img className="object-contain shadow-lg rounded-full max-w-full h-auto align-middle border-none" src={userD.imageFile} alt="noppimg"/>
+                        <img className="object-contain shadow-lg rounded-full max-w-full h-auto align-middle border-none" src={userD.imageFile ? "userD.imageFile" : "./images/profile/nopp.jpg"} alt="noppimg"/>
                         }
                     </div> 
         
