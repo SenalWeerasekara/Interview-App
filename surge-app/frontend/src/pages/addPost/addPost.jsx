@@ -17,9 +17,20 @@ const AddPost = ({setOpenAddPost, username}) =>{
     const [description, setDes] = useState('')
     const [imageFile, setImage] = useState('')
     const [uploadingImage, setUploadingImage] = useState(false)
-    const handleSubmit = async (e) =>{
+    const [valid, setValid] = useState(null)
+
+    const checkValid = (e) => {
         e.preventDefault()
 
+        if (!imageFile || !description){
+            setValid("Add something first!")
+        } else {
+            setValid(null)
+            handleSubmit()
+        }
+    }
+
+    const handleSubmit = async () =>{
         if(!user){
             return
         }
@@ -67,14 +78,14 @@ const AddPost = ({setOpenAddPost, username}) =>{
         let image = await files[0].getFile();
     
         if (image.size > 2 * 1024 * 1024) {
-        //   setImageBig(true);
-          console.log("image big error")
+          setValid("File too big. Max 2MB")
           return;
         }
     
         try {    
             console.log("image file set");
             setUploadingImage(true)
+            setValid(false)
             let [_, url] = await uploadFile(image);
             console.log(url);
             setImage(url);
@@ -93,7 +104,7 @@ const AddPost = ({setOpenAddPost, username}) =>{
                 <div className="  pt-8 pb-8 p-8  rounded-2xl bg-gradient-to-br from-red-700/40 to-gray-600/40">
                   
                     <div className="bg-white p-10 pr-20 pl-20 rounded-2xl">
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={checkValid}>
                             <div className="font-bold ">Make a Post</div> 
                             <div className="bg-gray-300 flex justify-center mb-4 rounded-2xl cursor-pointer hover:bg-stone-400" onClick={(event) => pick_image()}>
                                 {imageFile ? 
@@ -105,13 +116,15 @@ const AddPost = ({setOpenAddPost, username}) =>{
                             <div className='p-4 bg-red-400 animate-pulse'>Uploading Image please wait...</div>
                             : " "}
                             
-                        
+                            
                             <div className='mt-6'>Description</div> 
                             <div><textarea 
                                 className="resize-y w-96 h-36  outline outline-offset-2 outline-1 rounded-xl" 
                                 placeholder="Add something great"
                                 onChange={(e) => {setDes(e.target.value);}}>
                             </textarea></div>
+
+                            {valid && <div className="mt-4 rounded bg-red-300 pl-10 pr-10 pt-2 pb-2 border-2 border-red-800">{valid}</div>}
 
                             <div className="flex justify-center">
                                 <button
@@ -137,3 +150,4 @@ const AddPost = ({setOpenAddPost, username}) =>{
 }
 
 export default AddPost
+

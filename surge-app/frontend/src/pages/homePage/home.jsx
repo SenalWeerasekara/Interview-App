@@ -40,7 +40,6 @@ function HomePage(){
                                     <AddPost
                                         setOpenAddPost={setOpenAddPost}
                                         username={username}
-                                        
                                     />
                                 )}
                             </div>
