@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import { uploadFile } from "../../firebase";
 // import { Storage } from "../../firebase";
 import { useAuthContext } from '../../hook/useAuthContext';
+import { useNavigate } from "react-router-dom";
 
 
 const likes = 0
 const handleCancelClick = true
 
 const AddPost = ({setOpenAddPost, username}) =>{
+    let navigate = useNavigate();
     const { user } = useAuthContext()
     const [description, setDes] = useState('')
     const [imageFile, setImage] = useState('')
@@ -36,6 +38,7 @@ const AddPost = ({setOpenAddPost, username}) =>{
         } else if (response.ok){
             console.log("added new post")
             console.log({imageFile})
+            navigate(0)
         }
     }
 
@@ -75,7 +78,6 @@ const AddPost = ({setOpenAddPost, username}) =>{
             console.log(url);
             setImage(url);
             
-
         } catch (e) {
           return;
         }
@@ -85,20 +87,21 @@ const AddPost = ({setOpenAddPost, username}) =>{
 
     return (
         <div>
-            <div className="fixed z-50 inset-0 bg-gradient-to-br from-black/60 to-black/60 flex justify-center items-center backdrop-blur-sm">
-                <div className="  pt-4 pb-4 p-4  rounded-2xl bg-gradient-to-br from-red-700/40 to-gray-600/40">
+            <div className="fixed  inset-0 bg-gradient-to-br from-black/60 to-black/60 flex justify-center items-center backdrop-blur-sm">
+                <div className="  pt-8 pb-8 p-8  rounded-2xl bg-gradient-to-br from-red-700/40 to-gray-600/40">
                   
                     <div className="bg-white p-10 pr-20 pl-20 rounded-2xl">
                         <form onSubmit={handleSubmit}>
                             <div className="font-bold ">Make a Post</div> 
-                            <div className="bg-gray-300 h-96 w-96 mb-4 rounded-2xl">
+                            <div className="bg-gray-300  mb-4 rounded-2xl">
                                 <svg fill="none" stroke="currentColor" className="p-20" stroke-width="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
+                                
                             </div>
                             <div className='p-4 bg-red-300' onClick={(event) => pick_image()}>add photo</div>
                         
-                            <div>Description</div> 
+                            <div className='mt-6'>Description</div> 
                             <div><textarea 
                                 className="resize-y w-96 h-36  outline outline-offset-2 outline-1 rounded-xl" 
                                 placeholder="Add something great"

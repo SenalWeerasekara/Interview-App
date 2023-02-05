@@ -21,24 +21,24 @@ function HomePage(){
 
     return (
         <div className="justify-center flex">
-            <div className="bg-amber-500 w-5/6 relative">
+            <div className=" w-5/6 relative">
                 <div className="flex ">
 
-                    <div className="bg-red-200 w-1/4 sticky top-0 "> 
+                    <div className=" w-1/4 sticky top-0 "> 
                         <SideBar setSelectedHome={setSelectedHome}/> 
                     </div>
 
 
-                    <div className="bg-blue-200 w-2/4 ">
-                        <div className="bg-pink-400 h-20 flex justify-between sticky top-0 ">
+                    <div className=" w-2/4 ">
+                        <div className="bg-white/90 h-20 flex justify-between sticky top-0 pt-2">
                             <div>
-                                <h1>{selectedHome}</h1>
+                                <h1 className="text-3xl ml-10 mt-6">{selectedHome}</h1>
                             </div>
                             <div>
                             <button
                                 onClick={() =>setOpenAddPost(true)}
-                                className="bg-red-600 mt-4 rounded-2xl text-white content-center p-3 pl-14 pr-14 bg-fixed  hover:bg-red-700 active:bg-red-800">
-                                Post
+                                className="mr-4 bg-red-600 mt-4 rounded-xl text-white content-center p-3 pl-8 pr-8 bg-fixed  hover:bg-red-700 active:bg-red-800">
+                                Add Post
                             </button>
                                 {openAddPost && (
                                     <AddPost
@@ -49,22 +49,16 @@ function HomePage(){
                             </div>
                         </div>
                         
-                        <div className="bg-amber-400 z-30 flex justify-center">
+                        <div className=" flex justify-center pl-10 pr-10">
                             {selectedHome == 'feed' ? <ShowPost /> : "" }
                             {selectedHome == 'my' ? <ShowMyPost /> : "" }
                         </div>
                     </div>
 
-                    <div className="bg-green-200 w-1/4 pt-48">
-                        <div className="sticky top-0 z-10">
-                            <div className="bg-blue-100 h-48">
-                              <ShowUser setUsername={setUsername}/>
-                            </div>
-                            <div className="bg-blue-500 h-10">
-                                <button onClick={handleLogout} className="py-2 px-7 rounded bg-red-600">Log Out</button>
-                            </div>
-                        </div>
+                    <div className={`${openAddPost? "-z-10" : ""}  sticky top-0 w-1/4`}>
+                              <ShowUser setUsername={setUsername}/> 
                     </div>
+
                 </div>
             </div>
         </div>
