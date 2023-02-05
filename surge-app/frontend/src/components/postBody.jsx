@@ -7,6 +7,8 @@ const PostBody = ({post}) =>{
     const {user} = useAuthContext()
     const [likeCount, setLikeCount] = useState(post.likes)
 
+    //This below section can be improved but ran out of time so kept it as it is. 
+    // Takes current time and set time to figure out how many days ago it was posted. 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
@@ -16,12 +18,6 @@ const PostBody = ({post}) =>{
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
 
     date = diffDays + "d ago"
-    
-    
-
-    console.log("DFate > " + date)
-    
-
 
     const handle = () => {
         handleLike()
@@ -65,12 +61,9 @@ const PostBody = ({post}) =>{
         if(!response.ok){
             console.log("something went wrong")
         } else if (response.ok){
-            console.log("added new liksse")
-            // updateLikeCount()
+            // Update like counter
         }
     }
-
-    // console.log("username>>>" + post.likes)
     
     return (
         <div className="m-10">
@@ -99,12 +92,6 @@ const PostBody = ({post}) =>{
 }
 
 export default PostBody;
-
-
-
-// let date3=new Date("2020-06-16T02:55:08.151437Z").toLocaleDateString()
-// console.log(date3)
-
 
  
 

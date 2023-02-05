@@ -18,18 +18,15 @@ const createPost = async(req, res) => {
 //get all posts
 const getPosts = async(req, res) =>{
     const post = await Post.find({}).sort({createdAt: -1})
-    // const post = await Post.find({})
     res.status(200).json(post)
 }
 
 // get all my posts
 const getMyPosts = async(req, res) =>{
     const userID = req.user._id
-    // console.log(user)
     console.log(userID)
 
     const post = await Post.find({userID}).sort({createdAt: -1})
-    // const post = await Post.find({})
     res.status(200).json(post)
 }
 
@@ -89,7 +86,6 @@ const updateLike = async(req, res) => {
     }
     return res.status(200).json(post)
 }
-
 
 
 module.exports = {

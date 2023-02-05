@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSignup } from "../../hook/useSignup";
 import { useNavigate } from "react-router-dom";
 import { uploadFile } from "../../firebase";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function RegisterPage(){
     let navigate = useNavigate();
@@ -15,10 +16,37 @@ function RegisterPage(){
     const {signup, error, isLoading} = useSignup()
     const [uploading, setUploading] = useState(false)
 
+    const [verify, setVerify] = useState(true)
+    const [verifyMsg, setVerifyMsg] = useState(null)
+    const [capOnState, setCapOnState] = useState(false)
     const [valid, setValid] = useState('')
 
+    const onChange = () => {
+      setVerify(true);
+    }
+
+    const checkVerify = () => {
+      setCapOnState(false)
+
+      if(error || verifyMsg || valid){
+          setCapOnState(true)
+          setVerify(false)
+      }
+
+      if(!email){
+          setVerifyMsg('email is empty')
+      } else if (!password){
+          setVerifyMsg('password is empty')
+      }
+      if(verify){
+          setVerifyMsg(null)
+          handleSubmit()
+      }else if (!verify){
+          setVerifyMsg('verify that you are human!')
+      }
+    }
+
     const handleSubmit = async () =>{
-       
         await signup(email, password, username, name, imageFile )
     }
 
@@ -30,8 +58,7 @@ function RegisterPage(){
         setValid("password does not match")
       } else {
         setValid(null)
-        console.log("worked")
-        handleSubmit()
+        checkVerify()
       }
     }
 
@@ -86,33 +113,35 @@ function RegisterPage(){
                     <form action="" onSubmit={checkValid}>
                         <div className="bg-gradient-to-tr from-red-800/40 to-gray-800/70  backdrop-blur-sm pt-14 pb-16 pl-24 pr-24 flex flex-col justify-center items-center rounded-xl">
                             <div className="text-3xl text-white">Register</div>    
-                        
                                 <div className="ml-20 mr-20 pt-4 pb-2 w-full">
-                                <div className="text-lg mt-14 w-full"><input onChange={(e)=> setName(e.target.value)} value={name} type="text" placeholder="Name"  className="text=4xl bg-black/0 border-0 focus:outline-none text-white border-b-2 w-full placeholder-white " /></div>
+                                    <div className="text-lg mt-14 w-full"><input onChange={(e)=> setName(e.target.value)} value={name} type="text" placeholder="Name"  className="text=4xl bg-black/0 border-0 focus:outline-none text-white border-b-2 w-full placeholder-white " /></div>
                                     <div className="text-lg mt-14 w-full"><input onChange={(e)=> setEmail(e.target.value)} value={email} type="text" placeholder="Email"  className="text=4xl bg-black/0 focus:outline-none border-0 text-white border-b-2 w-full placeholder-white " /></div>
                                     <div className="text-lg mt-14 w-full"><input onChange={(e)=> setUserName(e.target.value)} value={username} type="text" placeholder="User Name"  className="text=4xl focus:outline-none bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
                                     <div className="text-lg mt-14"><input onChange={(e)=> setPassword(e.target.value)} value={password} type="Password"  placeholder="Password"  className="text=4xl focus:outline-none text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
                                     <div className="text-lg mt-14"><input onChange={(e)=> setPasswordCon(e.target.value)} value={passwordCon} type="Password"  placeholder="Confirm Password"  className="focus:outline-none text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
                                     <div className='p-2 bg-stone-300 cursor-pointer hover:bg-stone-400 active:bg-stone-500 rounded mt-8' onClick={(event) => pick_image()}>add photo</div>
-                                    
                                 </div>
                                 {error && <div className="rounded bg-red-300 pl-10 pr-10 pt-2 pb-2 border-2 border-red-800">{error}</div>}
                                 {valid && <div className="rounded bg-red-300 pl-10 pr-10 pt-2 pb-2 border-2 border-red-800">{valid}</div>}
+                                {verifyMsg && <div className="rounded bg-red-300 pl-10 pr-10 pt-2 pb-2 border-2 border-red-800">{verifyMsg}</div>}
+
+                                {capOnState ?  
+                                  <ReCAPTCHA
+                                      sitekey="6Lfjw1UkAAAAAENxsjNrS4Ef7v3Dm0zoLPoWsqqK"
+                                      onChange={onChange}
+                                  />
+                                : " "}
 
                                 <div className="flex justify-end items-center mt-12 bg-blue-00">
-                                
                                     {uploading ? " " :  <div onClick={()=>(navigate("/login"))}   className="flex text-white items-center mr-5">Login</div>}
-                                   
                                     <div>
                                         {uploading ? <div className="py-2 px-7 animate-pulse rounded bg-gray-200" >Uploading Image</div> : 
                                         <button disabled={isLoading} className="py-2 px-7 rounded bg-red-600">Register</button>
                                         }
                                     </div>
-                                   
                                 </div> 
-                            
-                        </div>
-                    </form>
+                          </div>
+                     </form>
                 </div>
 
                 <div className="bg-white w-2/5 grid h-screen place-items-center">

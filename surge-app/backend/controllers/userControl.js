@@ -39,16 +39,11 @@ const signupUser = async (req, res) => {
 //get userDetails
 const getUserDetails = async(req, res) =>{
     const userID = req.user._id
-    console.log("this is id" + userID)
     const userD = await User.findOne({_id: userID}).sort({createdAt: -1})
     const user = {email : userD.email, name : userD.name, username : userD.username, imageFile : userD.imageFile}
     res.status(200).json(user)
-console.log(user)
-
-    
+console.log(user) 
 }
-
-
 
 
 module.exports = {signupUser, loginUser, getUserDetails}

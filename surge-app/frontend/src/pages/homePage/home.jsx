@@ -13,8 +13,6 @@ function HomePage(){
     const [selectedHome, setSelectedHome] = useState("feed")
     const [username, setUsername] = useState(null);
 
- 
-
     return (
         <div className="justify-center flex">
             <div className=" w-5/6 relative">
@@ -31,11 +29,11 @@ function HomePage(){
                                 <h1 className="text-3xl ml-10 mt-6">{selectedHome}</h1>
                             </div>
                             <div>
-                            <button
-                                onClick={() =>setOpenAddPost(true)}
-                                className="mr-4 bg-red-600 mt-4 rounded-xl text-white content-center p-3 pl-8 pr-8 bg-fixed  hover:bg-red-700 active:bg-red-800">
-                                Add Post
-                            </button>
+                                <button
+                                    onClick={() =>setOpenAddPost(true)}
+                                    className="mr-4 bg-red-600 mt-4 rounded-xl text-white content-center p-3 pl-8 pr-8 bg-fixed  hover:bg-red-700 active:bg-red-800">
+                                    Add Post
+                                </button>
                                 {openAddPost && (
                                     <AddPost
                                         setOpenAddPost={setOpenAddPost}

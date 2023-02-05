@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLogin } from "../../hook/useLogin";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function LoginPage(){
     let navigate = useNavigate();
@@ -9,32 +10,66 @@ function LoginPage(){
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
     const { login, error, isLoading } = useLogin()
+    const [verify, setVerify] = useState(true)
+    const [verifyMsg, setVerifyMsg] = useState(null)
+    const [capOnState, setCapOnState] = useState(false)
 
-    const handleSubmit = async (e) =>{
+    const onChange = () => {
+        setVerify(true);
+    }
+
+    const checkVerify = (e) => {
         e.preventDefault()
+        setCapOnState(false)
+
+        if(error || verifyMsg){
+            setCapOnState(true)
+            setVerify(false)
+        }
+
+        if(!email){
+            setVerifyMsg('email is empty')
+        } else if (!password){
+            setVerifyMsg('password is empty')
+        }
+        if(verify){
+            setVerifyMsg(null)
+            handleSubmit()
+        }else if (!verify){
+            setVerifyMsg('verify that you are human!')
+        }
+    }
+
+    const handleSubmit = async () =>{
         await login(email, password);
     }
     return (
         <div>
             <div className="flex flex-row h-screen w-screen">
                 <div className="bg-red-900 w-3/5 grid h-screen place-items-center bg-cover" style={ { backgroundImage: `url("images/login/login.jpg")` }}>
-                <form action="" onSubmit={handleSubmit}>
-                    <div className="bg-gradient-to-tr from-red-800/40 to-gray-800/70  backdrop-blur-sm pt-16 pb-20 pl-24 pr-24 flex flex-col justify-center items-center rounded-xl">
-                        
+                    <form action="" onSubmit={checkVerify}>
+                        <div className="bg-gradient-to-tr from-red-800/40 to-gray-800/70  backdrop-blur-sm pt-16 pb-20 pl-24 pr-24 flex flex-col justify-center items-center rounded-xl">
                             <div className="text-3xl text-white">Login</div>    
                             <div className="ml-20 mr-20 pt-20 pb-10 w-full">
                                 <div className="text-lg w-full"><input onChange={(e)=> setEmail(e.target.value)} value={email} type="text" placeholder="Email/Username"  className="focus:outline-none text=4xl bg-black/0 border-0 text-white border-b-2 w-full placeholder-white " /></div>
                                 <div className="text-lg mt-14"><input onChange={(e)=> setPassword(e.target.value)} value={password} type="Password"  placeholder="Password"  className="focus:outline-none text=4xl text-white bg-black/0 border-0 border-b-2 w-full placeholder-white " /></div>        
                             </div>
                             {error && <div className="rounded bg-red-300 pl-10 pr-10 pt-2 pb-2 border-2 border-red-800">{error}</div>}
+                            {verifyMsg && <div className="rounded bg-red-300 pl-10 pr-10 pt-2 pb-2 border-2 border-red-800">{verifyMsg}</div>}
+                            
+                            {capOnState ?  
+                                <ReCAPTCHA
+                                    sitekey="6Lfjw1UkAAAAAENxsjNrS4Ef7v3Dm0zoLPoWsqqK"
+                                    onChange={onChange}
+                                />
+                            : " s"}
+                            
                             <div className="flex justify-end items-center mt-16 bg-blue-00">
                                 <div onClick={()=>(navigate("/register"))}  className="flex text-white items-center mr-5">Register</div>
                                 <div><button disabled={isLoading} className="py-2 px-7 rounded bg-red-600">Login</button></div>
-                            </div> 
-                        
-                    </div>
+                            </div>  
+                        </div>
                     </form>
                 </div>
 

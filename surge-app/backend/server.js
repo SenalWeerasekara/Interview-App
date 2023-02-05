@@ -5,8 +5,6 @@ const userRoutes = require('./routes/user')
 const likedPostRoutes = require('./routes/likedPosts')
 const mongoose = require('mongoose')
 
-
-
 // express app
 const app = express()
 

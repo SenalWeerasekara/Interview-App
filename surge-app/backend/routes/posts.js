@@ -7,7 +7,6 @@ router.put('/like/:id', updateLike)
 
 router.use(requireAuth)
 
-
 //Get all posts
 router.get('/', getPosts)
 
